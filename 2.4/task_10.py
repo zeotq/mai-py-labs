@@ -15,7 +15,6 @@ def orangeSlices(n: int, m: int = 3) -> list:
     data = []
     components = [i + 1 for i in range(0, n - m + 1)]
 
-
     def orangeCut(cur: list, alph: list, nl: int, ml: int) -> None:
         temp = []
         if sum(cur) > nl or len(cur) > ml:
@@ -30,7 +29,6 @@ def orangeSlices(n: int, m: int = 3) -> list:
                 temp.append(next)
 
         return temp
-
 
     for i in components:
         orangeCut(cur=[i], alph=components, nl=n, ml=m)
