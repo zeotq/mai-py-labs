@@ -1,5 +1,12 @@
-def isSimple(n: int) -> bool:
-    """Определение простого числа"""
+def isPrime(n: int) -> bool:
+    """Определение простого числа
+    
+    Args:
+        n (int): некоторое число
+    
+    Returns:
+        bool: истина / ложь
+    """
 
     if n in [-1, 0, 1]:
         return False
@@ -9,4 +16,4 @@ def isSimple(n: int) -> bool:
     return True
 
 
-print("YES" if isSimple(int(input())) else "NO")
+print("YES" if isPrime(int(input())) else "NO")
