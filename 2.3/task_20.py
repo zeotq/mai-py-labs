@@ -15,7 +15,7 @@ def hashCheck4Legit(current_block: int, prev_block: int = 0) -> bool:
         prev_block (int, optional): previus block. Defaults to 0.
 
     Returns:
-        bool: is block legit
+        bool: is block legit.
     """
 
     prev_block_hash = prev_block % 256
