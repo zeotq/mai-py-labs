@@ -1,12 +1,17 @@
 def main():
-    len_1 = int(input())
-    len_2 = int(input())
-    peoples_1 = set([input() for i in range(len_1 + len_2)])
+    peoples = {}
+    for _ in range(int(input()) + int(input())):
+        name = input()
+        if name in peoples:
+            peoples[name] += 1
+        else:
+            peoples[name] = 1
+    peoples = list(filter(lambda a: peoples[a] == 1, peoples))
 
-    if (max(len_1, len_2) == len(peoples_1)):
-        print('Таких нет')
-    else:
-        print()
+    if len(peoples) == 0:
+        return "Таких нет"
+    return len(peoples)
+
 
 if __name__ == "__main__":
-    main()
+    print(main())
