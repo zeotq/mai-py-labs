@@ -1,28 +1,19 @@
 import json
 
 
-def user_parser(users, updates): 
+def user_parser(*args): 
     user_from_name = dict()
-    for block in users + updates:
-        if 'name' not in block:
-            continue
-
-        name = block['name']
-        address = block.get('address', '')
-        phone = block.get('phone', '')
-
-        if name in user_from_name:
-            if address:
-                user_from_name[name]['address'] = max(address, user_from_name[name].get('address', ''))
-            if phone:
-                user_from_name[name]['phone'] = max(phone, user_from_name[name].get('phone', ''))
-        else:
-            new_dict = {}
-            if address:
-                new_dict['address'] = address
-            if phone:
-                new_dict['phone'] = phone
-            user_from_name[name] = new_dict
+    for pars_block in args:
+        for block in pars_block:
+            if 'name' not in block:
+                continue
+            name = block.pop('name')
+            if name not in user_from_name:
+                user_from_name[name] = {}
+                
+            for key, value in block.items():
+                if user_from_name[name].get(key, "") < value:
+                    user_from_name[name][key] = value
 
     return user_from_name
 
@@ -37,7 +28,6 @@ def main():
          open(updates_filelink, mode="r", encoding="UTF-8") as UPDATES:
         users = json.load(USERS)
         updates = json.load(UPDATES)
-
         merged_users = user_parser(users, updates)
 
         USERS.seek(0)
@@ -47,6 +37,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-dict().get()
