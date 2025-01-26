@@ -295,7 +295,7 @@ class Checkers_Game():
 
         return True
 
-    def get_moves(self, checker_pos: tuple | str = "A1", double: bool = True) -> list[dict]:
+    def get_moves(self, checker_pos: tuple | str = "A1", double: bool = False) -> list[dict]:
 
         if isinstance(checker_pos, str):
             checker_pos = self.coords_letter_to_tuple(checker_pos)
@@ -479,20 +479,7 @@ class Checkers_Game():
     
 
 def main():
-    field = Checkers_Field(30, 30)
-    field.fill_matrix(lines=3)
-    checkers = Checkers_Game(field=field)
-    checkers.field.fill_cell(checkers.coords_letter_to_tuple("C7"), Checker("b"))
-    checkers.field.fill_cell(checkers.coords_letter_to_tuple("E7"), Checker("b"))
-    checkers.field.fill_cell(checkers.coords_letter_to_tuple("G7"), Checker("b"))
-    checkers.field.fill_cell(checkers.coords_letter_to_tuple("C5"), Checker("b"))
-    checkers.field.fill_cell(checkers.coords_letter_to_tuple("E5"), Checker("b"))
-    checkers.field.fill_cell(checkers.coords_letter_to_tuple("G5"), Checker("b"))
-    checkers.field.fill_cell(checkers.coords_letter_to_tuple("C3"), Checker("b"))
-    checkers.field.fill_cell(checkers.coords_letter_to_tuple("E3"), Checker("b"))
-    checkers.field.fill_cell(checkers.coords_letter_to_tuple("G3"), Checker("b"))
-    checkers.field.fill_cell(checkers.coords_letter_to_tuple("H2"), Checker("w"))
-    checkers.start()
+    pass
 
 
 if __name__ == "__main__":
