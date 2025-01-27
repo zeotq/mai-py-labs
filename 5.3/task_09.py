@@ -1,15 +1,15 @@
 import re
 
 
+class BadCharacterError(Exception):
+    ...
+
+
 class CyrillicError(Exception):
     ...
 
 
 class CapitalError(Exception):
-    ...
-
-
-class BadCharacterError(Exception):
     ...
 
 
@@ -38,10 +38,14 @@ def name_validation(name: str):
 
 
 def user_validation(*, last_name: str = None, first_name: str = None, username: str = None, **kwargs):
+    if not last_name or not first_name or not username:
+        raise KeyError
+    
     if bool(kwargs):
         raise KeyError
+    
     if not (isinstance(last_name, str) and isinstance(first_name, str) and isinstance(username, str)):
-        raise 
+        raise TypeError
 
     name_validation(last_name)
     name_validation(first_name)
@@ -52,7 +56,7 @@ def user_validation(*, last_name: str = None, first_name: str = None, username: 
 
 from pytest import raises
 
-def test_1():
+def test_1():  # Good situation test
     dict_1 = {'last_name': 'Иванов', 'first_name': 'Иван', 'username': 'ivanych45'}
     dict_2 = user_validation(last_name="Иванов", first_name="Иван", username="ivanych45")
     assert (dict_1.items() == dict_2.items())
@@ -63,8 +67,15 @@ def test_2():
                               first_name="Иван", 
                               username="ivanych45", 
                               password="123456"))
+        
+def test_3():
+    with raises(KeyError):
+        print(user_validation())
+
+def test_4():
+    with raises(TypeError):
+        user_validation(last_name=42, first_name=42, username=42)
 
 
 if __name__ == "__main__":
-    test_1()
-    test_2()
+    test_4()
