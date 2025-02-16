@@ -11,7 +11,7 @@ class Fraction(object):
         elif len(args) == 1 and type(args[0]) is str and "/" in args[0]:
             self.__num, self.__den = tuple(map(int, args[0].split("/")))
         # Init with one int in str format: num
-        elif len(args) == 1 and type(args[0]) is str and args[0].isdigit():
+        elif len(args) == 1 and type(args[0]) is str and args[0].replace('-', '').isnumeric():
             self.__num, self.__den = int(args[0]), 1
         # Init with one int in int format: num
         elif len(args) == 1 and type(args[0]) is int:
